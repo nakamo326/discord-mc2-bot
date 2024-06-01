@@ -50,7 +50,7 @@ data "aws_iam_policy_document" "lambda_start_ec2_role" {
       "ec2:DescribeInstances"
     ]
     effect    = "Allow"
-    resources = ["arn:aws:ec2:*:*:*"]
+    resources = ["*"]
   }
 }
 
@@ -67,7 +67,7 @@ data "aws_iam_policy_document" "lambda_stop_ec2_role" {
       "ec2:DescribeInstances"
     ]
     effect    = "Allow"
-    resources = ["arn:aws:ec2:*:*:*"]
+    resources = ["*"]
   }
 }
 
