@@ -1,36 +1,24 @@
 import { InteractionType, InteractionResponseType } from "discord-interactions";
-import { startEC2, stopEC2 } from "./controllEC2.js";
 import { verifyRequest } from "./verifyRequest.js";
+import { isCommand, commandMap } from "./definitions.js";
 
 const handleInteraction = async (interaction) => {
-  if (interaction.type === InteractionType.PING) {
+  const interactionType = interaction.type;
+  const command = interaction.data.options[0].value;
+
+  // メッセージ更新用にtokenを渡す
+  const payload = {
+    token: interaction.token,
+    appId: interaction.application_id,
+  };
+
+  if (interactionType === InteractionType.PING) {
     return {
       type: InteractionResponseType.PONG,
     };
   }
-  if (interaction.type === InteractionType.APPLICATION_COMMAND) {
-    const { data } = interaction;
-    let resContent;
-
-    // メッセージ更新用にtokenを渡す
-    const payload = {
-      token: interaction.token,
-      appId: interaction.application_id,
-    };
-
-    switch (data.options[0].value) {
-      case "start":
-        resContent = await startEC2(payload);
-        break;
-      case "stop":
-        resContent = await stopEC2(payload);
-        break;
-      case "test":
-        resContent = "ﾎﾟﾝ";
-        break;
-      default:
-        resContent = "ｺﾏﾝﾄﾞﾜｶﾝﾅｲ";
-    }
+  if (interactionType === InteractionType.APPLICATION_COMMAND) {
+    const resContent = isCommand(command) ? commandMap[command](payload) : "ｺﾏﾝﾄﾞﾜｶﾝﾅｲ";
 
     return {
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -53,11 +41,13 @@ exports.handler = async (event) => {
   const { body } = event;
   const interaction = JSON.parse(body);
 
+  const response = await handleInteraction(interaction);
+
   return {
     statusCode: 200,
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(await handleInteraction(interaction)),
+    body: JSON.stringify(response),
   };
 };
