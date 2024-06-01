@@ -3,6 +3,11 @@ import { startEC2, stopEC2 } from "./controllEC2.js";
 import { verifyRequest } from "./verifyRequest.js";
 
 const handleInteraction = async (interaction) => {
+  if (interaction.type === InteractionType.PING) {
+    return {
+      type: InteractionResponseType.PONG,
+    };
+  }
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
     const { data } = interaction;
     let resContent;
@@ -47,19 +52,6 @@ exports.handler = async (event) => {
 
   const { body } = event;
   const interaction = JSON.parse(body);
-
-  // pingの場合はpongを返す、URL登録用
-  if (interaction.type === InteractionType.PING) {
-    return {
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        type: InteractionResponseType.PONG,
-      }),
-    };
-  }
 
   return {
     statusCode: 200,
