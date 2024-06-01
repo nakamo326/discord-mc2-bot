@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "@biomejs/biome": "1.7.3"
+  },
+  "dependencies": {
+    "discord-interactions": "^3.4.0"
   }
 }
