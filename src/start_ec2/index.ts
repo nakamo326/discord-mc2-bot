@@ -27,7 +27,6 @@ exports.handler = async (event) => {
     });
 
     await ec2Client.send(command);
-    console.log("Instance started");
 
     // wait for the instance to start
     await waitUntilInstanceRunning(
@@ -36,7 +35,6 @@ exports.handler = async (event) => {
         InstanceIds: [instanceId],
       }
     );
-    console.log("Instance is running");
 
     // get the public IP of the instance
     const describeCommand = new DescribeInstancesCommand({
@@ -51,7 +49,6 @@ exports.handler = async (event) => {
       return { statusCode: 500, body: { status: "error" } };
     }
     const PublicIpAddress = Reservations[0].Instances[0].PublicIpAddress;
-    console.log("Public IP address: ", PublicIpAddress);
 
     // add A record to Route 53
     const changeCommand = new ChangeResourceRecordSetsCommand({
@@ -71,7 +68,6 @@ exports.handler = async (event) => {
       },
     });
     await route53Client.send(changeCommand);
-    console.log("A record added to Route 53");
 
     // send following response to Discord
     const appId = event.appId;
@@ -86,7 +82,6 @@ exports.handler = async (event) => {
         body: JSON.stringify({ content: "ｷﾄﾞｳｶﾝﾘｮｳ" }),
       }
     );
-    console.log("Response sent to Discord");
 
     return { statusCode: 200, body: { status: "success" } };
   } catch (error) {
