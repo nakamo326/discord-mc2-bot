@@ -1,4 +1,4 @@
-FROM node:18-slim
+FROM --platform=arm64 node:18-slim
 
 WORKDIR /nodejs
 
