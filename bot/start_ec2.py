@@ -44,9 +44,7 @@ def lambda_handler(event, context):
     req = request.Request(
         f"https://discord.com/api/v10/webhooks/{app_id}/{token}",
         data=json.dumps({"content": "ｷﾄﾞｳｶﾝﾘｮｳ"}).encode(),
-        headers={
-            "Content-Type": "application/json",
-        },
+        headers={"Content-Type": "application/json", "User-Agent": ""},
         method="POST",
     )
     request.urlopen(req)
