@@ -12,6 +12,6 @@ await esbuild.build({
   sourcemap: true,
   platform: "node",
   target: ["node18"],
-  external: ["aws-sdk"],
+  external: ["@aws-sdk/client-lambda"],
   outdir: "dist",
 });
