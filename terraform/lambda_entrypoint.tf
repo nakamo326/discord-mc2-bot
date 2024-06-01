@@ -27,7 +27,7 @@ resource "aws_lambda_function" "discord_mc2_entrypoint" {
 
   source_code_hash = data.archive_file.lambda.output_base64sha256
 
-  runtime       = "nodejs18.x"
+  runtime       = "nodejs20.x"
   architectures = ["arm64"]
   timeout       = 10
 

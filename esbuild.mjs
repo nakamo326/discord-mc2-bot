@@ -11,7 +11,7 @@ await esbuild.build({
   minify: true,
   sourcemap: true,
   platform: "node",
-  target: ["node18"],
+  target: ["node20"],
   external: ["@aws-sdk/*"],
   outdir: "dist",
 });
