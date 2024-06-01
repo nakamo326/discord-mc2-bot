@@ -1,5 +1,7 @@
 import { Lambda } from "aws-sdk";
 
+const region = "ap-northeast-1";
+
 const lambda = new Lambda({ region });
 
 export const startEC2 = async (payload) => {

@@ -2,8 +2,6 @@ import { InteractionType, InteractionResponseType } from "discord-interactions";
 import { startEC2, stopEC2 } from "./controllEC2.js";
 import { verifyRequest } from "./verifyRequest.js";
 
-const region = "ap-northeast-1";
-
 const handleInteraction = async (interaction) => {
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
     const { data } = interaction;
