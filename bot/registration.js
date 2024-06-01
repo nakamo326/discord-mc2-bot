@@ -1,9 +1,7 @@
 // import fetch from "node-fetch";
 
 const appID = process.env.APP_ID;
-console.log(appID);
 const guildID = process.env.GUILD_ID;
-console.log(guildID);
 const apiEndpoint = `https://discord.com/api/v8/applications/${appID}/guilds/${guildID}/commands`;
 const botToken = process.env.BOT_TOKEN;
 
