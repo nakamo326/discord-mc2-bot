@@ -6,7 +6,7 @@ https://zenn.dev/nacal/articles/e7f0d481661ec0
 
 関数URLの認証はNONE
 
-タイムアウト3秒だと短い？entryだけ30秒に変更
+タイムアウト3秒だと短い？entryだけ30秒に変更（多分不要
 
 entrypointのruntimeはnode16
 
@@ -14,6 +14,7 @@ https://shinji-blog.com/etc/discord-webhooks-403/
 fxxk off
 
 TODO
+- [ ] lambdaのポリシー整理
 - [ ] help実装
 - [ ] status?
 - [ ] プレイ中の人いるか確認する方法あるか確認
