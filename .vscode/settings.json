@@ -1,13 +1,10 @@
 {
-  "[python]": {
-      "editor.defaultFormatter": "ms-python.black-formatter",
-      "editor.tabSize": 4, 
-      "editor.formatOnSave": true
-  },
-  "black-formatter.args": [
-    "--line-length=120"
-  ],
   "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
     "editor.defaultFormatter": "biomejs.biome",
     "editor.tabSize": 2,
     "editor.formatOnSave": true
