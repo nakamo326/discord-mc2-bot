@@ -1,58 +1,8 @@
-const { InteractionType, InteractionResponseType, verifyKey } = require("discord-interactions");
-const { Lambda } = require("aws-sdk");
-
-const verifyRequest = (event) => {
-  const { headers, body } = event;
-  const signature = headers["x-signature-ed25519"];
-  const timestamp = headers["x-signature-timestamp"];
-  const publicKey = process.env.DISCORD_PUBLIC_KEY;
-  if (!body || !signature || !timestamp || !publicKey) {
-    return false;
-  }
-  return verifyKey(body, signature, timestamp, publicKey);
-};
+import { InteractionType, InteractionResponseType } from "discord-interactions";
+import { startEC2, stopEC2 } from "./controllEC2.js";
+import { verifyRequest } from "./verifyRequest.js";
 
 const region = "ap-northeast-1";
-const lambda = new Lambda({ region });
-
-const startEC2 = async (payload) => {
-  const functionARN = process.env.START_EC2_INSTANCES_LAMBDA;
-  console.log(functionARN);
-
-  try {
-    const params = {
-      FunctionName: functionARN,
-      InvocationType: "Event",
-      Payload: JSON.stringify(payload),
-    };
-
-    const response = await lambda.invoke(params).promise();
-    return "ｻｰﾊﾞｰｷﾄﾞｳﾁｭｳ...";
-  } catch (error) {
-    console.log(error);
-    return "ﾅﾝｶｵｶｼｲ";
-  }
-};
-
-const stopEC2 = async (payload) => {
-  const functionARN = process.env.STOP_EC2_INSTANCES_LAMBDA;
-  console.log(functionARN);
-
-  try {
-    const params = {
-      FunctionName: functionARN,
-      InvocationType: "Event",
-      Payload: JSON.stringify(payload),
-    };
-
-    const response = await lambda.invoke(params).promise();
-
-    return "ｻｰﾊﾞｰﾃｲｼﾁｭｳ...";
-  } catch (error) {
-    console.log(error);
-    return "ﾅﾝｶｵｶｼｲ";
-  }
-};
 
 const handleInteraction = async (interaction) => {
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
