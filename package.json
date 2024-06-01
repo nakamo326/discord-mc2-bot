@@ -1,0 +1,14 @@
+{
+  "name": "discord-mc2-bot",
+  "version": "0.1.0",
+  "description": "lambda functions for controll minecraft server on ec2 instance",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nakamo326",
+  "license": "ISC",
+  "devDependencies": {
+    "@biomejs/biome": "1.7.3"
+  }
+}
