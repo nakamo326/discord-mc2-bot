@@ -4,6 +4,7 @@
   "description": "lambda functions for controll minecraft server on ec2 instance",
   "main": "index.js",
   "scripts": {
+    "check": "biome check --apply --no-errors-on-unmatched ./src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "nakamo326",
