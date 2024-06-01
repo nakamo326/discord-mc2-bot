@@ -39,7 +39,6 @@ def lambda_handler(event, context):
     )
 
     # discord interactionにレスポンスを返す
-    print(event)
     app_id = event["appId"]
     token = event["token"]
     req = request.Request(
