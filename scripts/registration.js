@@ -24,6 +24,10 @@ const commandData = {
           value: "stop",
         },
         {
+          name: "status",
+          value: "status",
+        },
+        {
           name: "test",
           value: "test",
         },
