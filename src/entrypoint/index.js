@@ -18,7 +18,7 @@ const handleInteraction = async (interaction) => {
     };
   }
   if (interactionType === InteractionType.APPLICATION_COMMAND) {
-    const resContent = isCommand(command) ? commandMap[command](payload) : "ｺﾏﾝﾄﾞﾜｶﾝﾅｲ";
+    const resContent = isCommand(command) ? await commandMap[command](payload) : "ｺﾏﾝﾄﾞﾜｶﾝﾅｲ";
 
     return {
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,

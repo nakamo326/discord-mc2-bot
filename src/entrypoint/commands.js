@@ -39,3 +39,22 @@ export const stopEC2 = async (payload) => {
     return "ﾅﾝｶｵｶｼｲ";
   }
 };
+
+export const statusServer = async (payload) => {
+  const functionARN = process.env.STATUS_SERVER_INSTANCES_LAMBDA;
+
+  try {
+    const command = new InvokeCommand({
+      FunctionName: functionARN,
+      InvocationType: "Event",
+      Payload: JSON.stringify(payload),
+    });
+
+    const response = await lambdaClient.send(command);
+
+    return "ｶｸﾆﾝﾁｭｳ...";
+  } catch (error) {
+    console.log(error);
+    return "ﾅﾝｶｵｶｼｲ";
+  }
+};

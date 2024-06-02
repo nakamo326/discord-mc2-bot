@@ -1,4 +1,4 @@
-import { startEC2, stopEC2 } from "./controllEC2.js";
+import { startEC2, stopEC2, statusServer } from "./commands.js";
 
 export const commandMap = {
   start: async (payload) => {
@@ -6,6 +6,9 @@ export const commandMap = {
   },
   stop: async (payload) => {
     return await stopEC2(payload);
+  },
+  status: async (payload) => {
+    return await statusServer(payload);
   },
   test: async (payload) => {
     return "ﾎﾟﾝ";

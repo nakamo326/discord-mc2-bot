@@ -34,9 +34,10 @@ resource "aws_lambda_function" "discord_mc2_entrypoint" {
 
   environment {
     variables = {
-      DISCORD_PUBLIC_KEY         = var.discord_bot_public_key
-      START_EC2_INSTANCES_LAMBDA = aws_lambda_function.discord_mc2_start_ec2.arn
-      STOP_EC2_INSTANCES_LAMBDA  = aws_lambda_function.discord_mc2_stop_ec2.arn
+      DISCORD_PUBLIC_KEY             = var.discord_bot_public_key
+      START_EC2_INSTANCES_LAMBDA     = aws_lambda_function.discord_mc2_start_ec2.arn
+      STOP_EC2_INSTANCES_LAMBDA      = aws_lambda_function.discord_mc2_stop_ec2.arn
+      STATUS_SERVER_INSTANCES_LAMBDA = aws_lambda_function.discord_mc2_status.arn
     }
   }
 }
