@@ -1,12 +1,5 @@
-import {
-  EC2Client,
-  DescribeInstancesCommand,
-  StopInstancesCommand,
-} from "@aws-sdk/client-ec2";
-import {
-  Route53Client,
-  ChangeResourceRecordSetsCommand,
-} from "@aws-sdk/client-route-53";
+import { EC2Client, DescribeInstancesCommand, StopInstancesCommand } from "@aws-sdk/client-ec2";
+import { Route53Client, ChangeResourceRecordSetsCommand } from "@aws-sdk/client-route-53";
 
 const instanceId = process.env.EC2_INSTANCE_ID;
 const hostedZoneId = process.env.HOSTED_ZONE_ID;
@@ -26,11 +19,7 @@ exports.handler = async (event) => {
       InstanceIds: [instanceId],
     });
     const { Reservations } = await ec2Client.send(describeCommand);
-    if (
-      !Reservations ||
-      !Reservations[0].Instances ||
-      !Reservations[0].Instances[0]
-    ) {
+    if (!Reservations || !Reservations[0].Instances || !Reservations[0].Instances[0]) {
       return { statusCode: 500, body: { status: "error" } };
     }
     const PublicIpAddress = Reservations[0].Instances[0].PublicIpAddress;
@@ -61,18 +50,17 @@ exports.handler = async (event) => {
     await ec2Client.send(stopCommand);
 
     // send following response to Discord
-    const appId = event.appId;
-    const token = event.token;
-    await fetch(
-      `https://discord.com/api/v9/webhooks/${appId}/${token}/messages/@original`,
-      {
+    if (event.appId && event.token) {
+      const appId = event.appId;
+      const token = event.token;
+      await fetch(`https://discord.com/api/v9/webhooks/${appId}/${token}/messages/@original`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ content: "ﾃｲｼｶﾝﾘｮｳ" }),
-      }
-    );
+      });
+    }
 
     return { statusCode: 200, body: { status: "success" } };
   } catch (error) {

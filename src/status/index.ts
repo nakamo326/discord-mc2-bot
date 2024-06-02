@@ -1,15 +1,18 @@
 const domainName = process.env.DOMAIN_NAME;
 
-const getOnlinePlayerNum = async (host: string) => {
+const getServerStatus = async (host: string) => {
   const res = await fetch(`https://api.mcsrvstat.us/2/${encodeURIComponent(host)}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   });
-  const { players } = await res.json();
+  const { online, players } = await res.json();
   console.log(players.online);
-  return players.online;
+  return {
+    online,
+    onlinePlayerNum: players.online,
+  };
 };
 
 exports.handler = async (event) => {
@@ -18,7 +21,8 @@ exports.handler = async (event) => {
   }
 
   const host = domainName;
-  const onlinePlayerNum = await getOnlinePlayerNum(host);
+  const status = await getServerStatus(host);
+  console.log(status);
 
   if (event.appId && event.token) {
     // send following response to Discord
@@ -29,9 +33,9 @@ exports.handler = async (event) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ content: `ﾌﾟﾚｲﾁｭｳ: ${onlinePlayerNum}` }),
+      body: JSON.stringify({ content: `ﾌﾟﾚｲﾁｭｳ: ${status.onlinePlayerNum}` }),
     });
   }
 
-  return { statusCode: 200, body: { onlinePlayerNum } };
+  return { statusCode: 200, body: { status } };
 };
