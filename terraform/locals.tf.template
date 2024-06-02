@@ -1,0 +1,20 @@
+variable "discord_bot_public_key" {
+  description = "The public key of the Discord bot"
+  default     = "put your public key here"
+}
+
+variable "ec2_instance_id" {
+  description = "The ID of the EC2 instance"
+  default     = "put your instance id here"
+}
+
+variable "route53_hosted_zone_id" {
+  description = "The ID of the Route 53 hosted zone"
+  default     = "put your hosted zone id here"
+}
+
+variable "route53_server_domain" {
+  description = "The domain of the server"
+  default     = "put your server domain here"
+}
+
