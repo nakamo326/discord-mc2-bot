@@ -1,4 +1,4 @@
-// import fetch from "node-fetch";
+require("dotenv").config();
 
 const appID = process.env.APP_ID;
 const guildID = process.env.GUILD_ID;
