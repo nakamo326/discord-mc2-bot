@@ -31,6 +31,7 @@ resource "aws_lambda_function" "discord_mc2_entrypoint" {
   architectures = ["arm64"]
   timeout       = 10
 
+  memory_size = 256
 
   environment {
     variables = {
