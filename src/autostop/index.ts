@@ -19,7 +19,7 @@ exports.handler = async (event) => {
     console.log(payload);
     const serverStatus = payload.body.status;
 
-    if (serverStatus.online === true && serverStatus.onlinePlayerNum === 0) {
+    if (serverStatus.online && serverStatus.online === true && serverStatus.onlinePlayerNum === 0) {
       const stopCommand = new InvokeCommand({
         FunctionName: stopEC2functionARN,
         InvocationType: "Event",
