@@ -16,7 +16,6 @@ exports.handler = async (event) => {
     const response = await lambdaClient.send(command);
 
     const payload = JSON.parse(response.Payload?.transformToString() ?? "{}");
-    console.log(payload);
     const serverStatus = payload.body.status;
 
     if (serverStatus.online && serverStatus.online === true && serverStatus.onlinePlayerNum === 0) {
