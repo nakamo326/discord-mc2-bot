@@ -7,12 +7,16 @@ const getServerStatus = async (host: string) => {
       "Content-Type": "application/json",
     },
   });
-  const { online, players } = await res.json();
-  console.log(players.online);
-  return {
-    online,
-    onlinePlayerNum: players.online,
-  };
+  const data = await res.json();
+  console.log("data:", data);
+  if (!data) {
+    return { online: false, onlinePlayerNum: 0 };
+  }
+  const { online, players } = data;
+  if (!online) {
+    return { online: false, onlinePlayerNum: 0 };
+  }
+  return { online, onlinePlayerNum: players.online };
 };
 
 exports.handler = async (event) => {
