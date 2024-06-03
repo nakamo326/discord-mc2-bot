@@ -39,3 +39,11 @@ resource "aws_lambda_function" "discord_mc2_autostop" {
     }
   }
 }
+
+resource "aws_lambda_permission" "invoke_permission_to_autostop" {
+  statement_id  = "AllowExecutionFromCloudWatch"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.discord_mc2_autostop.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.discord_mc2_autostop_rule.arn
+}
