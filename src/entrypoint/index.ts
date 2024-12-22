@@ -1,6 +1,6 @@
-import { InteractionType, InteractionResponseType } from "discord-interactions";
+import { InteractionResponseType, InteractionType } from "discord-interactions";
+import { commandMap, isCommand } from "./definitions.js";
 import { verifyRequest } from "./verifyRequest.js";
-import { isCommand, commandMap } from "./definitions.js";
 
 const handleInteraction = async (interaction) => {
   const interactionType = interaction.type;

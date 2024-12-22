@@ -1,4 +1,4 @@
-import { startEC2, stopEC2, statusServer } from "./commands.ts";
+import { startEC2, statusServer, stopEC2 } from "./commands.ts";
 
 export const commandMap = {
   start: async (payload) => {

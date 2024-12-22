@@ -1,5 +1,5 @@
-import { EC2Client, DescribeInstancesCommand, StopInstancesCommand } from "@aws-sdk/client-ec2";
-import { Route53Client, ChangeResourceRecordSetsCommand } from "@aws-sdk/client-route-53";
+import { DescribeInstancesCommand, EC2Client, StopInstancesCommand } from "@aws-sdk/client-ec2";
+import { ChangeResourceRecordSetsCommand, Route53Client } from "@aws-sdk/client-route-53";
 
 const instanceId = process.env.EC2_INSTANCE_ID;
 const hostedZoneId = process.env.HOSTED_ZONE_ID;
